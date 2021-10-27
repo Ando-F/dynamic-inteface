@@ -10,26 +10,23 @@
 </head>
 <body>
     <ul id="header">
-        <div>
             <li>
                 <h1>App Name</h1>
             </li>
-        </div>
-
-        <img id="hamburger-menu" src="images/menu.png">
-
-<!--        <div id="list">-->
-<!--            <li>-->
-<!--                <a>Home</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a>Contact</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a>Account</a>-->
-<!--            </li>-->
-<!--        </div>-->
+            <li id="list">
+                <img id="hamburger-menu" src="images/menu.png">
+                <ul id="hidden-list" class="hide-list">
+                    <li class="list-element">Home</li>
+                    <li class="list-element">Contact</li>
+                    <li class="list-element">Account</li>
+                </ul>
+            </li>
     </ul>
+    <div id="container">
+        <img class="arrows" id="left-arrow" src="images/right-arrow.png">
+        <div id="slide-div"></div>
+        <img class="arrows" id="right-arrow" src="images/right-arrow.png">
+    </div>
 
     <script src="script.js"></script>
 </body>
