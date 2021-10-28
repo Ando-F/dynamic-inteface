@@ -20,7 +20,6 @@ function hideOpenList () {
 
 // slides
 let amountOfImages = 0;
-let dotsQuantity = 0;
 
 const slideDiv = document.getElementById('slide-div');
 const leftArrow = document.getElementById('left-arrow');
@@ -30,7 +29,6 @@ const dotsDiv = document.getElementById('dots');
 
 // create elements on first page load
 createSlide('images/autumn-3840138_1280.jpg');
-dotsOne();
 
 // add event listeners to right and left arrows
 let click = 0;
@@ -56,15 +54,21 @@ function slideConditions () {
     if (click === 1 || click === -2) {
         clearDiv();
         createSlide('images/italy-6735340_1280.jpg');
-        dotsTwo();
+        unmarkExactDot(firstDot);
+        unmarkExactDot(thirdDot);
+        markExactDot(secondDot);
     } else if (click === 2 || click === -1) {
         clearDiv();
         createSlide('images/lighthouse-6581129_1280.jpg');
-        dotsThree();
+        unmarkExactDot(secondDot);
+        unmarkExactDot(firstDot);
+        markExactDot(thirdDot);
     } else {
         clearDiv();
         createSlide('images/autumn-3840138_1280.jpg');
-        dotsOne();
+        unmarkExactDot(thirdDot);
+        unmarkExactDot(secondDot);
+        markExactDot(firstDot);
         click = 0;
     }
 }
@@ -85,81 +89,65 @@ function createSlide (image) {
 }
 
 // create dots
+const firstDot = document.getElementById('one');
+const secondDot = document.getElementById('two');
+const thirdDot = document.getElementById('three');
 
-// dots for first picture
-function dotsOne () {
-    clearDots();
-    createBlackDot();
-    createEmptyDot();
-    createEmptyDot();
-    dotsQuantity = 0;
-}
+function markExactDot (dotNumber) {
+    clearDots(dotNumber);
 
-// dots for second picture
-function dotsTwo () {
-    clearDots();
-    createEmptyDot();
-    createBlackDot();
-    createEmptyDot();
-    dotsQuantity = 0;
-}
-
-//dots for third image
-function dotsThree () {
-    clearDots();
-    createEmptyDot();
-    createEmptyDot();
-    createBlackDot();
-    dotsQuantity = 0;
-}
-
-// delete current dots to load new ones
-function clearDots () {
-    while (dotsDiv.firstChild) {
-        dotsDiv.removeChild(dotsDiv.firstChild);
-    }
-}
-
-// create inactive dot
-function createEmptyDot () {
-    const dot = document.createElement('img');
-    dot.src = 'images/rec.png'
-    dot.classList.add('dot');
-    dot.setAttribute('data-index', dotsQuantity);
-    dotsQuantity += 1;
-
-    dotsDiv.appendChild(dot);
-}
-
-// create active dot
-function createBlackDot () {
     const dot = document.createElement('img');
     dot.src = 'images/record.png'
     dot.classList.add('dot');
-    dot.setAttribute('data-index', dotsQuantity);
-    dotsQuantity += 1;
+    dotNumber.appendChild(dot);
+}
 
-    dotsDiv.appendChild(dot);
+function unmarkExactDot (dotNumber) {
+    clearDots(dotNumber);
+
+    const dot = document.createElement('img');
+    dot.src = 'images/rec.png'
+    dot.classList.add('dot');
+    dotNumber.appendChild(dot);
+}
+
+// delete current dots to load new ones
+function clearDots (dotNumber) {
+    while (dotNumber.firstChild) {
+        dotNumber.removeChild(dotNumber.firstChild);
+    }
 }
 
 // adding event listeners for dots
-const firstDot = document.querySelector('[data-index="0"]');
 firstDot.addEventListener('click', (e) => {
     e.preventDefault();
     click = 0;
-    slideConditions();
+
+    clearDiv();
+    createSlide('images/autumn-3840138_1280.jpg');
+    unmarkExactDot(thirdDot);
+    unmarkExactDot(secondDot);
+    markExactDot(firstDot);
 })
 
-const secondDot = document.querySelector('[data-index="1"]');
 secondDot.addEventListener('click', (e) => {
     e.preventDefault();
     click = 1;
-    slideConditions();
+
+    clearDiv();
+    createSlide('images/italy-6735340_1280.jpg');
+    unmarkExactDot(firstDot);
+    unmarkExactDot(thirdDot);
+    markExactDot(secondDot);
 })
 
-const thirdDot = document.querySelector('[data-index="2"]');
 thirdDot.addEventListener('click', (e) => {
     e.preventDefault();
     click = 2;
-    slideConditions();
+
+    clearDiv();
+    createSlide('images/lighthouse-6581129_1280.jpg');
+    unmarkExactDot(secondDot);
+    unmarkExactDot(firstDot);
+    markExactDot(thirdDot);
 })
