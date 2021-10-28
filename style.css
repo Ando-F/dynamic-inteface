@@ -91,4 +91,5 @@ body {
 
 .dot {
     width: 10px;
+    cursor: pointer;
 }

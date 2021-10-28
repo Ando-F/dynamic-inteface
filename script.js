@@ -20,6 +20,7 @@ function hideOpenList () {
 
 // slides
 let amountOfImages = 0;
+let dotsQuantity = 0;
 
 const slideDiv = document.getElementById('slide-div');
 const leftArrow = document.getElementById('left-arrow');
@@ -32,15 +33,11 @@ dotsOne();
 
 let click = 0;
 rightArrow.addEventListener('click', () => {
-    clearDiv();
-    clearDots();
     click += 1;
     slideConditions();
 })
 
 leftArrow.addEventListener('click', () => {
-    clearDiv();
-    clearDots();
     click -= 1;
     slideConditions();
 })
@@ -59,12 +56,15 @@ function clearDots () {
 
 function slideConditions () {
     if (click === 1 || click === -2) {
+        clearDiv();
         createSlide('images/italy-6735340_1280.jpg');
         dotsTwo();
     } else if (click === 2 || click === -1) {
+        clearDiv();
         createSlide('images/lighthouse-6581129_1280.jpg');
         dotsThree();
     } else {
+        clearDiv();
         createSlide('images/autumn-3840138_1280.jpg');
         dotsOne();
         click = 0;
@@ -87,27 +87,35 @@ function createSlide (image) {
 
 // dots
 function dotsOne () {
+    clearDots();
     createBlackDot();
     createEmptyDot();
     createEmptyDot();
+    dotsQuantity = 0;
 }
 
 function dotsTwo () {
+    clearDots();
     createEmptyDot();
     createBlackDot();
     createEmptyDot();
+    dotsQuantity = 0;
 }
 
 function dotsThree () {
+    clearDots();
     createEmptyDot();
     createEmptyDot();
     createBlackDot();
+    dotsQuantity = 0;
 }
 
 function createEmptyDot () {
     const dot = document.createElement('img');
     dot.src = 'images/rec.png'
     dot.classList.add('dot');
+    dot.setAttribute('data-index', dotsQuantity);
+    dotsQuantity += 1;
 
     dotsDiv.appendChild(dot);
 }
@@ -116,6 +124,26 @@ function createBlackDot () {
     const dot = document.createElement('img');
     dot.src = 'images/record.png'
     dot.classList.add('dot');
+    dot.setAttribute('data-index', dotsQuantity);
+    dotsQuantity += 1;
 
     dotsDiv.appendChild(dot);
 }
+
+const firstDot = document.querySelector('[data-index="0"]');
+firstDot.addEventListener('click', () => {
+    click = 0;
+    slideConditions();
+})
+
+const secondDot = document.querySelector('[data-index="1"]');
+secondDot.addEventListener('click', () => {
+    click = 1;
+    slideConditions();
+})
+
+const thirdDot = document.querySelector('[data-index="2"]');
+thirdDot.addEventListener('click', () => {
+    click = 2;
+    slideConditions();
+})
