@@ -151,3 +151,6 @@ thirdDot.addEventListener('click', (e) => {
     unmarkExactDot(firstDot);
     markExactDot(thirdDot);
 })
+
+// making button clicked every 5 sec
+setInterval(function () {rightArrow.click()}, 5000);
