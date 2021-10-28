@@ -79,3 +79,16 @@ body {
 #left-arrow {
     transform: scaleX(-1);
 }
+
+/* dots */
+#dots {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+
+    margin-top: 5px;
+}
+
+.dot {
+    width: 10px;
+}
