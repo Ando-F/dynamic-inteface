@@ -28,9 +28,11 @@ const rightArrow = document.getElementById('right-arrow');
 
 const dotsDiv = document.getElementById('dots');
 
+// create elements on first page load
 createSlide('images/autumn-3840138_1280.jpg');
 dotsOne();
 
+// add event listeners to right and left arrows
 let click = 0;
 rightArrow.addEventListener('click', () => {
     click += 1;
@@ -42,18 +44,14 @@ leftArrow.addEventListener('click', () => {
     slideConditions();
 })
 
+// delete current image before loading next one
 function clearDiv () {
     while (slideDiv.firstChild) {
         slideDiv.removeChild(slideDiv.firstChild);
     }
 }
 
-function clearDots () {
-    while (dotsDiv.firstChild) {
-        dotsDiv.removeChild(dotsDiv.firstChild);
-    }
-}
-
+// when to clear div, show images and dots
 function slideConditions () {
     if (click === 1 || click === -2) {
         clearDiv();
@@ -71,6 +69,7 @@ function slideConditions () {
     }
 }
 
+// function for creating images
 function createSlide (image) {
     const imageDiv = document.createElement('div');
     imageDiv.classList.add('image-slide');
@@ -85,7 +84,9 @@ function createSlide (image) {
     slideDiv.appendChild(imageDiv);
 }
 
-// dots
+// create dots
+
+// dots for first picture
 function dotsOne () {
     clearDots();
     createBlackDot();
@@ -94,6 +95,7 @@ function dotsOne () {
     dotsQuantity = 0;
 }
 
+// dots for second picture
 function dotsTwo () {
     clearDots();
     createEmptyDot();
@@ -102,6 +104,7 @@ function dotsTwo () {
     dotsQuantity = 0;
 }
 
+//dots for third image
 function dotsThree () {
     clearDots();
     createEmptyDot();
@@ -110,6 +113,14 @@ function dotsThree () {
     dotsQuantity = 0;
 }
 
+// delete current dots to load new ones
+function clearDots () {
+    while (dotsDiv.firstChild) {
+        dotsDiv.removeChild(dotsDiv.firstChild);
+    }
+}
+
+// create inactive dot
 function createEmptyDot () {
     const dot = document.createElement('img');
     dot.src = 'images/rec.png'
@@ -120,6 +131,7 @@ function createEmptyDot () {
     dotsDiv.appendChild(dot);
 }
 
+// create active dot
 function createBlackDot () {
     const dot = document.createElement('img');
     dot.src = 'images/record.png'
@@ -130,20 +142,24 @@ function createBlackDot () {
     dotsDiv.appendChild(dot);
 }
 
+// adding event listeners for dots
 const firstDot = document.querySelector('[data-index="0"]');
-firstDot.addEventListener('click', () => {
+firstDot.addEventListener('click', (e) => {
+    e.preventDefault();
     click = 0;
     slideConditions();
 })
 
 const secondDot = document.querySelector('[data-index="1"]');
-secondDot.addEventListener('click', () => {
+secondDot.addEventListener('click', (e) => {
+    e.preventDefault();
     click = 1;
     slideConditions();
 })
 
 const thirdDot = document.querySelector('[data-index="2"]');
-thirdDot.addEventListener('click', () => {
+thirdDot.addEventListener('click', (e) => {
+    e.preventDefault();
     click = 2;
     slideConditions();
 })
